@@ -8,4 +8,3 @@ wget https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-CUR-100-ACFNDS/v1.0.1
 tar xvfz lab-app.tgz
 chown apache:root /var/www/html/rds.conf.php
 fi
-
