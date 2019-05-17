@@ -1,14 +1,13 @@
 provider "aws" {
-  region     = "eu-west-1"
+  region     = "${var.region}"
 }
-
 data "aws_ami" "aws_linux" {
-  most_recent = true
+  most_recent = "${var.main_most_recent}"
 
   filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-2.0.*-x86_64-gp2*"]
+    name   = "${var.main_filter_name}"
+    values = ["${var.instance_name}"]
   }
 
-  owners = ["137112412989"] # Canonical
+  owners = ["${var.owners}"] 
 }

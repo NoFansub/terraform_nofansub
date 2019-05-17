@@ -1,10 +1,10 @@
 #AMI
 data "aws_ami" "ami_esgi_src1" {
-  most_recent      = true
-  owners           = ["137112412989"]
+  most_recent      = "${var.datasource_most_recent}"
+  owners           = ["${var.datasource_owners}"]
   
   filter {
-    name            = "name"
-    values          =  [ "amzn2-ami-hvm-2.0.*-x86_64-gp2" ]
+    name            = "${var.datasource_filter_name}"
+    values          =  [ "${var.datasource_filter_name_value}" ]
   }
 }

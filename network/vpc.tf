@@ -1,39 +1,43 @@
+#VPC
 resource "aws_vpc" "esgi_src1" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "${var.vpc_cidr_block}"
 
   tags {
-    Name = "lab_esgi_src1"
+    Name = "${var.vpc_tag_name}"
   }
 }
 
+#SUBNET
 resource "aws_subnet" "main" {
   vpc_id     = "${aws_vpc.esgi_src1.id}"
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "eu-west-1a"
+  cidr_block = "${var.subnet_cidr_block}"
+  availability_zone = "${var.subnet_availability_zone}"
 
   tags {
-    Name = "subnet_esgi_src1"
+    Name = "${var.subnet_name}"
   }
 }
 
+#IGW
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.esgi_src1.id}"
 
   tags = {
-    Name = "igw_esgi_SRC3"
+    Name = "${var.igw_name}"
   }
 }
 
+#ROUTE TABLE
 resource "aws_route_table" "public_route" {
   vpc_id = "${aws_vpc.esgi_src1.id}"
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = "${var.route_table_cidr_block}"
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
   tags = {
-    Name = "Public_route_table"
+    Name = "${var.route_table_name}"
   }
 }
 
